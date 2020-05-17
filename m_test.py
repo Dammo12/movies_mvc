@@ -3,9 +3,10 @@ from view.m_view import View
 
 v = View()
 m = Model()
-#m.create_movie("Rojo Amanecer")
+#m.create_movie('Rojo Amanecer', '01:20:38', '2020-05-16')
+#m.create_m_casting(1,1,17000)
 #print(t[0][1])
-#t = m.create_actor('Juan', 'Romero', 'Salinas', 'Mexico', '4658812321', 21)
+#t = m.create_actor('Alberto', 'Estrada', 'Rojas', 'Colombia', '6325874125', 32)
 #print(t)
 #t = m.create_director('Guillermo', 'Del Toro', 'Gomez', 'Mexico', '4842531478', 53)
 #print(t)
@@ -18,8 +19,8 @@ m = Model()
 #print(t)
 
 
-#t = m.read_actors()
-#print(t)
+t = m.read_directors()
+v.read_directors(t)
 #t = m.read_directors()
 #print(t)
 #t = m.read_classifications()
