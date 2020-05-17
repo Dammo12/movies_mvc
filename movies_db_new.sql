@@ -3,7 +3,8 @@ USE movies_db;
 
 CREATE TABLE IF NOT EXISTS classifications
 (
-	rate VARCHAR(3) NOT NULL,
+	rate VARCHAR(5) NOT NULL,
+    recommended VARCHAR(30) NOT NULL,
     min_age int NOT NULL,
     PRIMARY KEY(rate)
 )ENGINE = INNODB;
@@ -11,7 +12,7 @@ CREATE TABLE IF NOT EXISTS classifications
 CREATE TABLE IF NOT EXISTS genres
 (
 	id_gen INT NOT NULL auto_increment,
-    gen VARCHAR(35) NOT NULL,
+    gen VARCHAR(25) NOT NULL,
     PRIMARY KEY(id_gen)
 )ENGINE = INNODB;
 
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS actors
 CREATE TABLE IF NOT EXISTS movies
 (
 	id_movie INT NOT NULL auto_increment,
-    m_title VARCHAR(100) NOT NULL,
+    m_title VARCHAR(60) NOT NULL,
     duration TIME,
     premiere_day DATE,
     

@@ -34,7 +34,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_actor(self,id_act):
         try:
@@ -45,7 +44,6 @@ class Model:
             return record
         except connector.Error as err:
             return err
-        #nice
 
     def read_actors(self):
         try:
@@ -55,7 +53,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
     def read_actors_country(self,a_country):
         try:
@@ -66,7 +63,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
     def read_actors_age(self,a_age):
         try:
@@ -77,7 +73,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
     def update_actor(self, fields, vals):
         try:
@@ -100,7 +95,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     #Directors
     def create_director(self, fn_d, ln1_d, ln2_d, d_country, phone_d, d_age ):
@@ -113,7 +107,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_director(self,id_dir):
         try:
@@ -123,8 +116,7 @@ class Model:
             record = self.cursor.fetchone()
             return record
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def read_directors(self):
         try:
@@ -134,7 +126,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
     def read_directors_country(self,d_country):
         try:
@@ -144,8 +135,7 @@ class Model:
             records = self.cursor.fetchall()
             return records
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def read_directors_age(self,d_age):
         try:
@@ -155,8 +145,7 @@ class Model:
             records = self.cursor.fetchall()
             return records
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def update_director(self, fields, vals):
         try:
@@ -179,20 +168,18 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     #Classifications
-    def create_classification(self, rate, min_age):
+    def create_classification(self, rate, recommended, min_age):
         try:
-            sql = 'INSERT INTO classifications (`rate`,`min_age`) VALUES (%s,%s)' 
-            vals = (rate, min_age)
+            sql = 'INSERT INTO classifications (`rate`, `recommended`, `min_age`) VALUES (%s,%s,%s)' 
+            vals = (rate, recommended, min_age)
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_classification(self,rate):
         try:
@@ -202,8 +189,7 @@ class Model:
             record = self.cursor.fetchone()
             return record
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def read_classifications(self):
         try:
@@ -213,18 +199,26 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
-    def read_classifications_age(self,min_age):
+    def read_classifications_minage(self,min_age):
         try:
-            sql = 'SELECT * FROM classifications WHERE min_age = %s'
+            sql = 'SELECT * FROM classifications WHERE min_age <= %s'
             vals = (min_age, )
             self.cursor.execute(sql, vals)
             records = self.cursor.fetchall()
             return records
         except connector.Error as err:
-            return err 
-        #nice
+            return err
+
+    def read_m_class(self,id_class):
+        try:
+            sql = 'SELECT movies.*, classifications.rate FROM (movie_det) JOIN (movies, classifications) WHERE movie_det.id_class = %s and movie_det.id_class = classifications.rate and movie_det.id_movie = movies.id_movie' 
+            vals = (id_class,)
+            self.cursor.execute(sql, vals)
+            records = self.cursor.fetchall()
+            return records
+        except connector.Error as err:
+            return err
 
     def update_classification(self, fields, vals):
         try:
@@ -247,7 +241,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     #Genres
     def create_genre(self, gen):
@@ -259,10 +252,9 @@ class Model:
             return True
         except connector.Error as err:
             self.cnx.rollback()
-            return err 
-        #nice
+            return err
 
-    def read_genre(self,id_gen): #Esta podria ser mas como una busqueda de genero xdd
+    def read_genre(self,id_gen):
         try:
             sql = 'SELECT * FROM genres WHERE id_gen = %s' 
             vals = (id_gen,)
@@ -270,8 +262,17 @@ class Model:
             record = self.cursor.fetchone()
             return record
         except connector.Error as err:
-            return err 
-        #nice
+            return err
+
+    def read_m_genre(self,id_gen):
+        try:
+            sql = 'SELECT movies.*, genres.gen FROM (movie_det) JOIN (movies, genres) WHERE movie_det.id_gen = %s and movie_det.id_gen = genres.id_gen and movie_det.id_movie = movies.id_movie' 
+            vals = (id_gen,)
+            self.cursor.execute(sql, vals)
+            records = self.cursor.fetchall()
+            return records
+        except connector.Error as err:
+            return err
 
     def read_genres(self):
         try:
@@ -281,7 +282,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
     def update_genre(self, fields, vals):
         try:
@@ -303,8 +303,7 @@ class Model:
             return count
         except connector.Error as err:
             self.cnx.rollback()
-            return err 
-        #nice
+            return err
 
     #Movies
     def create_movie(self, m_title, duration, premiere_day):
@@ -317,7 +316,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_movie(self,id_movie):
         try:
@@ -327,8 +325,7 @@ class Model:
             record = self.cursor.fetchone()
             return record
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def read_movies(self):
         try:
@@ -337,8 +334,7 @@ class Model:
             records = self.cursor.fetchall()
             return records
         except connector.Error as err:
-            return err 
-        #nice
+            return err
 
     def update_movie(self, fields, vals):
         try:
@@ -360,8 +356,7 @@ class Model:
             return count
         except connector.Error as err:
             self.cnx.rollback()
-            return err 
-        #nice
+            return err
 
     #Movie Details
     def create_m_det(self,id_movie,id_gen,id_class):
@@ -374,7 +369,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_m_det(self, id_movie):
         try:
@@ -385,7 +379,6 @@ class Model:
             return record
         except connector.Error as err:
             return err
-        #nice
 
 
     def update_m_det(self, fields, vals):
@@ -410,7 +403,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_m_cast(self, id_movie):
         try:
@@ -421,7 +413,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
 
     def update_m_cast(self, fields, vals):
@@ -445,7 +436,6 @@ class Model:
         except connector.Error as err:
             self.cnx.rollback()
             return err
-        #nice
 
     def read_m_dir(self, id_movie):
         try:
@@ -456,7 +446,6 @@ class Model:
             return records
         except connector.Error as err:
             return err
-        #nice
 
 
     def update_m_dir(self, fields, vals):
