@@ -1,4 +1,4 @@
-user:root
+user:damians
 password:damian10
 host:localhost
 database:movies_db

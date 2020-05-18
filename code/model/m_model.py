@@ -76,7 +76,7 @@ class Model:
 
     def update_actor(self, fields, vals):
         try:
-            sql = 'UPDATE actors SET' + ','.join(fields)+' WHERE id_act = %s'
+            sql = 'UPDATE actors SET ' + ','.join(fields)+' WHERE id_act = %s'
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
@@ -149,7 +149,7 @@ class Model:
 
     def update_director(self, fields, vals):
         try:
-            sql = 'UPDATE directors SET' + ','.join(fields)+' WHERE id_dir = %s'
+            sql = 'UPDATE directors SET ' + ','.join(fields)+' WHERE id_dir = %s'
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
@@ -222,7 +222,7 @@ class Model:
 
     def update_classification(self, fields, vals):
         try:
-            sql = 'UPDATE classifications SET' + ','.join(fields)+' WHERE rate = %s'
+            sql = 'UPDATE classifications SET ' + ','.join(fields)+' WHERE rate = %s'
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
@@ -285,7 +285,7 @@ class Model:
 
     def update_genre(self, fields, vals):
         try:
-            sql = 'UPDATE genres SET' + ','.join(fields)+' WHERE id_gen = %s'
+            sql = 'UPDATE genres SET ' + ','.join(fields)+' WHERE id_gen = %s'
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
@@ -338,7 +338,7 @@ class Model:
 
     def update_movie(self, fields, vals):
         try:
-            sql = 'UPDATE movies SET' + ','.join(fields)+' WHERE id_movie = %s'
+            sql = 'UPDATE movies SET ' + ','.join(fields)+' WHERE id_movie = %s'
             self.cursor.execute(sql, vals)
             self.cnx.commit()
             return True
@@ -414,17 +414,6 @@ class Model:
         except connector.Error as err:
             return err
 
-
-    def update_m_cast(self, fields, vals):
-        try:
-            sql = 'UPDATE casting SET '+','.join(fields)+' WHERE id_movie = %s'
-            self.cursor.execute(sql,vals)
-            self.cnx.commit()
-            return True
-        except connector.Error as err:
-            self.cnx.rollback()
-            return err
-
     #Movie director
     def create_m_director(self,id_movie,id_dir, salary_d):
         try:
@@ -445,15 +434,4 @@ class Model:
             records = self.cursor.fetchall()
             return records
         except connector.Error as err:
-            return err
-
-
-    def update_m_dir(self, fields, vals):
-        try:
-            sql = 'UPDATE movie_dir SET '+','.join(fields)+' WHERE id_movie = %s'
-            self.cursor.execute(sql,vals)
-            self.cnx.commit()
-            return True
-        except connector.Error as err:
-            self.cnx.rollback()
             return err

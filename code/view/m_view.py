@@ -29,6 +29,7 @@ class View:
         print('='*(len(str(id))+len(op)+24))
 
     def error(self, err):
+        print('-'*(len(err)+4))
         print('¡ERROR!'.center(len(err)+4))
         print(err.center(len(err)+4))
         print('-'*(len(err)+4))
@@ -62,8 +63,9 @@ class View:
         print('7.- Ver reparto de pelicula')
         print('8.- Ver directores de pelicula')
         print('9.- Actualizar pelicula')
-        print('10.- Eliminar pelicula')
-        print('11.- Regresar')
+        print('10.- Actualizar detalle a pelicula')
+        print('11.- Eliminar pelicula')
+        print('12.- Regresar')
 
     def read_movies(self, movies):
         print('-'*97)
@@ -106,10 +108,11 @@ class View:
         print('1.- Agregar actor')
         print('2.- Ver todos los actores')
         print('3.- Buscar actor')
-        print('4.- Ver reparto de pelicula')
-        print('5.- Actualizar actor')
-        print('6.- Eliminar actor')
-        print('7.- Regresar')
+        print('4.- Buscar actor por edad')
+        print('5.- Buscar actor por pais')
+        print('6.- Actualizar actor')
+        print('7.- Eliminar actor')
+        print('8.- Regresar')
 
     def read_actor(self, actor):
         print('--------------------------------------')
@@ -154,10 +157,11 @@ class View:
         print('1.- Agregar director')
         print('2.- Ver todos los directores')
         print('3.- Buscar director')
-        print('4.- Ver directores de pelicula')
-        print('5.- Actualizar director')
-        print('6.- Eliminar director')
-        print('7.- Regresar')
+        print('4.- Buscar directores por edad')
+        print('5.- Buscar directores por pais')
+        print('6.- Actualizar director')
+        print('7.- Eliminar director')
+        print('8.- Regresar')
 
     def read_director(self, director):
         print('--------------------------------------')
